@@ -1,0 +1,30 @@
+class Solution:
+    def magicalString(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        s=[1,2,2]#original magical string
+        num=1 # number of 1 in the first 3
+        head=2
+        
+        if n==0:
+            return 0
+        elif n<4:
+            return 1
+        else:
+            while len(s)<n:
+                fill=3-s[-1]
+                add=[fill]*int(s[head])#fill*np.ones((int(s[head]),))
+                s.extend(add)
+                num=num+(fill==1)*s[head]
+                head=head+1
+                
+            if len(s)==n:
+                return num
+            else:
+                while n<len(s):
+                    num=num-(s[n]==1)
+                    n=n+1
+                return int(num)
+        
